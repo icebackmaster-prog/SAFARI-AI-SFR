@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>SAFARI AI – All-in-One Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== PARTICLES ===== -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===== WELCOME SCREEN ===== -->
+    <section id="welcomeScreen">
+        <div class="welcome-glow">
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-icon">🦁</div>
+        </div>
+        <h1 class="welcome-title">SAFARI AI</h1>
+        <p class="welcome-sub">Powered by <strong>Safari Technology</strong></p>
+        <p class="welcome-desc">The next-generation AI platform for chatting, coding, creating images, editing photos, generating videos, writing content, and boosting productivity.</p>
+        <button class="btn-primary welcome-btn" id="welcomeGetStarted"><i class="fas fa-rocket"></i> Get Started</button>
+    </section>
+
+    <!-- ===== LOGIN PAGE ===== -->
+    <section id="loginPage" class="hidden">
+        <div class="login-card">
+            <div class="login-logo"><div class="ll-icon">🦁</div><h2>SAFARI <span>AI</span></h2><p>Welcome back! Sign in to continue</p></div>
+            <div class="form-group"><label for="loginEmail">Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com" value="demo@safari.ai" /></div>
+            <div class="form-group password-toggle"><label for="loginPassword">Password</label><input type="password" id="loginPassword" placeholder="Enter your password" value="password123" /><span class="toggle-eye" id="togglePassword"><i class="fas fa-eye"></i></span></div>
+            <div class="form-row"><label><input type="checkbox" id="rememberMe" checked /> Remember Me</label><a href="#" id="forgotPassword">Forgot Password?</a></div>
+            <button class="btn-primary" style="width:100%;justify-content:center;" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+            <div class="divider">or continue with</div>
+            <div class="social-login"><button id="googleLogin" title="Google"><i class="fab fa-google"></i></button><button id="appleLogin" title="Apple"><i class="fab fa-apple"></i></button><button id="githubLogin" title="GitHub"><i class="fab fa-github"></i></button></div>
+            <div class="signup-link">Don't have an account? <a href="#" id="createAccountLink">Create Account</a></div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN APP ===== -->
+    <div id="app" class="hidden">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand"><span class="brand-icon">🦁</span><span class="brand-text">SAFARI <span>AI</span></span></div>
+            <nav class="sidebar-nav">
+                <div class="nav-label">Main</div>
+                <a class="nav-item active" data-page="dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a class="nav-item" data-page="chat"><i class="fas fa-comment-dots"></i> AI Chat <span class="badge">New</span></a>
+                <a class="nav-item" data-page="image"><i class="fas fa-image"></i> Image Studio</a>
+                <a class="nav-item" data-page="video"><i class="fas fa-video"></i> Video Studio <span class="badge">Beta</span></a>
+                <a class="nav-item" data-page="audio"><i class="fas fa-music"></i> Audio Studio</a>
+                <a class="nav-item" data-page="code"><i class="fas fa-code"></i> Code Studio</a>
+                <a class="nav-item" data-page="writing"><i class="fas fa-pen-fancy"></i> Writing Studio</a>
+                <a class="nav-item" data-page="documents"><i class="fas fa-file-pdf"></i> Document AI</a>
+                <a class="nav-item" data-page="business"><i class="fas fa-briefcase"></i> Business AI</a>
+                <div class="nav-label" style="margin-top:8px;">Workspace</div>
+                <a class="nav-item" data-page="projects"><i class="fas fa-folder"></i> Saved Projects</a>
+                <a class="nav-item" data-page="history"><i class="fas fa-clock"></i> History</a>
+                <a class="nav-item" data-page="downloads"><i class="fas fa-download"></i> Downloads</a>
+                <div class="nav-label" style="margin-top:8px;">Account</div>
+                <a class="nav-item" data-page="profile"><i class="fas fa-user"></i> Profile</a>
+                <a class="nav-item" data-page="settings"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a class="nav-item" id="themeToggleSidebar"><i class="fas fa-moon" id="themeIconSidebar"></i> <span id="themeTextSidebar">Dark Mode</span></a>
+                <a class="nav-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <div class="search-wrap"><i class="fas fa-search"></i><input type="text" id="globalSearch" placeholder="Search features, commands..." /></div>
+                <div class="topbar-actions">
+                    <span class="premium-badge"><i class="fas fa-crown"></i> Premium</span>
+                    <button class="icon-btn" id="notifBtn"><i class="fas fa-bell"></i><span class="dot"></span></button>
+                    <button class="icon-btn" id="themeToggleTop"><i class="fas fa-moon" id="themeIconTop"></i></button>
+                    <div class="avatar" id="userAvatar">I</div>
+                </div>
+            </header>
+
+            <div class="page-container" id="pageContainer">
+                <!-- ===== DASHBOARD ===== -->
+                <section class="page active" id="page-dashboard">
+                    <div class="page-header"><div><h1>Dashboard</h1><p>Welcome back, <strong id="dashboardUserName">User</strong>! How can SAFARI AI help you today?</p></div></div>
+                    <div class="greeting">👋 Welcome back.</div>
+                    <div class="greeting-sub">How can SAFARI AI help you today?</div>
+                    <div class="quick-grid">
+                        <div class="quick-card" data-action="chat"><div class="qc-icon">💬</div><div class="qc-label">Chat with AI</div><div class="qc-desc">Ask anything</div></div>
+                        <div class="quick-card" data-action="image"><div class="qc-icon">🎨</div><div class="qc-label">Generate Images</div><div class="qc-desc">Create art</div></div>
+                        <div class="quick-card" data-action="edit-image"><div class="qc-icon">🖼️</div><div class="qc-label">Edit Images</div><div class="qc-desc">Transform photos</div></div>
+                        <div class="quick-card" data-action="video"><div class="qc-icon">🎥</div><div class="qc-label">Create Videos</div><div class="qc-desc">AI video generation</div></div>
+                        <div class="quick-card" data-action="audio"><div class="qc-icon">🎵</div><div class="qc-label">Generate Audio</div><div class="qc-desc">Music & speech</div></div>
+                        <div class="quick-card" data-action="code"><div class="qc-icon">💻</div><div class="qc-label">Write Code</div><div class="qc-desc">Programming help</div></div>
+                        <div class="quick-card" data-action="documents"><div class="qc-icon">📄</div><div class="qc-label">Summarize Documents</div><div class="qc-desc">PDF & text</div></div>
+                        <div class="quick-card" data-action="writing"><div class="qc-icon">✍️</div><div class="qc-label">Write Content</div><div class="qc-desc">Blogs & essays</div></div>
+                        <div class="quick-card" data-action="business"><div class="qc-icon">📊</div><div class="qc-label">Business Assistant</div><div class="qc-desc">Plans & invoices</div></div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-box"><div class="stat-number" id="statChats">0</div><div class="stat-label">Chats</div></div>
+                        <div class="stat-box"><div class="stat-number" id="statImages">0</div><div class="stat-label">Images Generated</div></div>
+                        <div class="stat-box"><div class="stat-number" id="statCode">0</div><div class="stat-label">Code Snippets</div></div>
+                        <div class="stat-box"><div class="stat-number" id="statTasks">0</div><div class="stat-label">Tasks</div></div>
+                    </div>
+                </section>
+
+                <!-- ===== AI CHAT ===== -->
+                <section class="page" id="page-chat">
+                    <div class="page-header"><div><h1>AI Chat</h1><p>Chat with Safari AI – intelligent, fast, and context-aware</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;"><select id="chatPersona" style="padding:8px 16px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:13px;"><option value="general">🧠 General</option><option value="programmer">💻 Programmer</option><option value="teacher">📚 Teacher</option><option value="business">💼 Business</option><option value="creative">🎨 Creative</option><option value="translator">🌍 Translator</option></select><button class="btn-secondary" id="newChatBtn"><i class="fas fa-plus"></i> New</button></div></div>
+                    <div class="chat-layout">
+                        <div class="chat-side" id="chatHistoryList"></div>
+                        <div class="chat-main-area">
+                            <div class="chat-messages" id="chatMessages"><div class="chat-msg assistant"><div class="msg-avatar">🦁</div><div class="msg-bubble"><div class="msg-label">SAFARI AI</div><div class="msg-content">👋 Hello! I'm Safari AI. How can I help you today?</div><div class="msg-time">Just now</div></div></div></div>
+                            <div class="chat-input-area">
+                                <button class="tool-btn" id="voiceChatBtn" title="Voice input"><i class="fas fa-microphone"></i></button>
+                                <button class="tool-btn" id="attachFileBtn" title="Attach file"><i class="fas fa-paperclip"></i></button>
+                                <input type="file" id="chatFileInput" style="display:none;" accept=".txt,.pdf,.docx,.jpg,.png" />
+                                <input type="text" id="chatInput" placeholder="Type your message..." />
+                                <button class="send-btn" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== IMAGE STUDIO ===== -->
+                <section class="page" id="page-image">
+                    <div class="page-header"><div><h1>Image Studio</h1><p>Generate, edit, enhance, and transform images with AI</p></div></div>
+                    <div class="image-studio">
+                        <div class="panel"><h4 style="margin-bottom:12px;">🎨 Generate</h4><input type="text" id="imagePrompt" placeholder="Describe your image..." style="width:100%;padding:12px 16px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);margin-bottom:10px;" /><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;"><select id="imageStyle" style="padding:8px 14px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);flex:1;"><option value="realistic">Realistic</option><option value="anime">Anime</option><option value="cartoon">Cartoon</option><option value="pencil">Pencil Sketch</option><option value="watercolor">Watercolor</option><option value="ghibli">Ghibli</option></select><button class="btn-primary" id="generateImageBtn"><i class="fas fa-wand-magic-sparkles"></i> Generate</button></div><div id="imagePreview" style="min-height:160px;background:var(--bg-card);border-radius:var(--radius-sm);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:14px;padding:20px;"><i class="fas fa-image" style="font-size:32px;margin-right:12px;"></i> Your image will appear here</div><div class="tools-row" style="margin-top:10px;"><span class="tool-chip" data-tool="bg-remove">🖼️ Background Remover</span><span class="tool-chip" data-tool="upscale">✨ Upscale</span><span class="tool-chip" data-tool="restore">🔄 Restore</span><span class="tool-chip" data-tool="enhance">🌟 Enhance</span></div></div>
+                        <div class="panel"><h4 style="margin-bottom:12px;">📤 Upload & Edit</h4><div class="drop-zone" id="imageDropZone"><i class="fas fa-cloud-upload-alt"></i><p>Drag & drop an image here<br /><small style="color:var(--text-muted);">or click to browse</small></p><input type="file" id="imageUpload" accept="image/*" style="display:none;" /></div><div id="uploadPreview" style="margin-top:12px;display:none;"><img id="uploadPreviewImg" style="max-width:100%;max-height:200px;border-radius:var(--radius-sm);" /><div class="tools-row" style="margin-top:8px;"><span class="tool-chip" data-tool="remove-bg">Remove BG</span><span class="tool-chip" data-tool="face-enhance">Face Enhance</span><span class="tool-chip" data-tool="upscale">Upscale 4K</span><span class="tool-chip" data-tool="restore">Restore</span></div></div></div>
+                    </div>
+                </section>
+
+                <!-- ===== VIDEO STUDIO ===== -->
+                <section class="page" id="page-video">
+                    <div class="page-header"><div><h1>Video Studio</h1><p>Create, edit, and enhance videos with AI</p></div></div>
+                    <div class="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">
+                        <div class="quick-card"><div class="qc-icon">🎬</div><div class="qc-label">Text-to-Video</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">🖼️</div><div class="qc-label">Image-to-Video</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">🧑‍💼</div><div class="qc-label">Talking Avatar</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">📝</div><div class="qc-label">Auto Subtitles</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">🎨</div><div class="qc-label">Background Removal</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">✨</div><div class="qc-label">Video Enhancement</div><div class="qc-desc">Coming soon</div></div>
+                    </div>
+                </section>
+
+                <!-- ===== AUDIO STUDIO ===== -->
+                <section class="page" id="page-audio">
+                    <div class="page-header"><div><h1>Audio Studio</h1><p>Create, edit, and transform audio with AI</p></div></div>
+                    <div class="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">
+                        <div class="quick-card" id="ttsCard"><div class="qc-icon">🔊</div><div class="qc-label">Text-to-Speech</div><div class="qc-desc">Convert text to speech</div></div>
+                        <div class="quick-card" id="sttCard"><div class="qc-icon">🎤</div><div class="qc-label">Speech-to-Text</div><div class="qc-desc">Transcribe audio</div></div>
+                        <div class="quick-card"><div class="qc-icon">🎵</div><div class="qc-label">Music Generator</div><div class="qc-desc">Coming soon</div></div>
+                        <div class="quick-card"><div class="qc-icon">🔇</div><div class="qc-label">Noise Removal</div><div class="qc-desc">Coming soon</div></div>
+                    </div>
+                    <div id="ttsPanel" style="display:none;margin-top:16px;padding:20px;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);"><textarea id="ttsText" rows="3" style="width:100%;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);">Hello! I am Safari AI, your all-in-one AI platform.</textarea><button class="btn-primary" id="ttsPlayBtn" style="margin-top:10px;"><i class="fas fa-play"></i> Listen</button></div>
+                    <div id="sttPanel" style="display:none;margin-top:16px;padding:20px;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);"><button class="btn-primary" id="sttRecordBtn"><i class="fas fa-microphone"></i> Start Recording</button><div id="sttResult" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);background:var(--bg-card);min-height:40px;border:1px solid var(--border);"></div></div>
+                </section>
+
+                <!-- ===== CODE STUDIO ===== -->
+                <section class="page" id="page-code">
+                    <div class="page-header"><div><h1>Code Studio</h1><p>Generate, debug, explain, and convert code</p></div></div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;"><select id="codeLanguage" style="padding:10px 18px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);"><option value="javascript">JavaScript</option><option value="python">Python</option><option value="html">HTML/CSS</option><option value="java">Java</option><option value="csharp">C#</option><option value="cpp">C++</option><option value="php">PHP</option><option value="sql">SQL</option><option value="typescript">TypeScript</option></select><select id="codeAction" style="padding:10px 18px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);"><option value="generate">Generate Code</option><option value="debug">Debug Code</option><option value="explain">Explain Code</option><option value="convert">Convert Language</option></select><button class="btn-primary" id="codeGenerateBtn"><i class="fas fa-code"></i> Generate</button></div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div><label style="font-weight:600;font-size:14px;">📝 Input / Description</label><textarea id="codeInput" rows="8" style="width:100%;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);margin-top:4px;" placeholder="Describe what code you need..."></textarea></div><div><label style="font-weight:600;font-size:14px;">💻 Generated Code</label><div id="codeOutput" style="width:100%;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);min-height:200px;font-family:monospace;font-size:13px;overflow:auto;white-space:pre-wrap;margin-top:4px;">// Your code will appear here</div><button class="btn-secondary" id="copyCodeBtn" style="margin-top:6px;"><i class="fas fa-copy"></i> Copy</button></div></div>
+                </section>
+
+                <!-- ===== WRITING STUDIO ===== -->
+                <section class="page" id="page-writing">
+                    <div class="page-header"><div><h1>Writing Studio</h1><p>Write, edit, and improve content with AI</p></div></div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;"><select id="writingType" style="padding:10px 18px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);"><option value="essay">Essay Writer</option><option value="story">Story Writer</option><option value="email">Email Writer</option><option value="grammar">Grammar Checker</option><option value="resume">Resume Builder</option><option value="proposal">Business Proposal</option><option value="caption">Social Media Caption</option><option value="blog">Blog Post</option><option value="translate">Translator</option></select><button class="btn-primary" id="writingGenerateBtn"><i class="fas fa-pen"></i> Generate</button></div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div><label style="font-weight:600;font-size:14px;">📝 Topic / Description</label><textarea id="writingInput" rows="8" style="width:100%;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);margin-top:4px;" placeholder="Describe what you want to write..."></textarea></div><div><label style="font-weight:600;font-size:14px;">✍️ Generated Content</label><div id="writingOutput" style="width:100%;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);min-height:200px;overflow:auto;margin-top:4px;">// Your content will appear here</div><button class="btn-secondary" id="copyWritingBtn" style="margin-top:6px;"><i class="fas fa-copy"></i> Copy</button></div></div>
+                </section>
+
+                <!-- ===== DOCUMENT AI ===== -->
+                <section class="page" id="page-documents">
+                    <div class="page-header"><div><h1>Document AI</h1><p>Chat with documents, summarize, and extract text</p></div></div>
+                    <div class="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+                        <div class="quick-card"><div class="qc-icon">📄</div><div class="qc-label">Chat with PDF</div><div class="qc-desc">Ask questions about PDFs</div><input type="file" accept=".pdf" style="margin-top:8px;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text);font-size:12px;" /></div>
+                        <div class="quick-card"><div class="qc-icon">📝</div><div class="qc-label">Summarize Document</div><div class="qc-desc">Get AI summaries</div><input type="file" accept=".txt,.pdf,.docx" style="margin-top:8px;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text);font-size:12px;" /></div>
+                        <div class="quick-card"><div class="qc-icon">👁️</div><div class="qc-label">OCR (Text Extraction)</div><div class="qc-desc">Extract text from images</div><input type="file" accept="image/*" style="margin-top:8px;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text);font-size:12px;" /></div>
+                    </div>
+                </section>
+
+                <!-- ===== BUSINESS AI ===== -->
+                <section class="page" id="page-business">
+                    <div class="page-header"><div><h1>Business AI</h1><p>AI tools for business, marketing, and growth</p></div></div>
+                    <div class="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">
+                        <div class="quick-card" data-action="invoice"><div class="qc-icon">📄</div><div class="qc-label">Invoice Generator</div><div class="qc-desc">Create invoices</div></div>
+                        <div class="quick-card" data-action="business-plan"><div class="qc-icon">📊</div><div class="qc-label">Business Plan</div><div class="qc-desc">Generate business plans</div></div>
+                        <div class="quick-card" data-action="marketing"><div class="qc-icon">📢</div><div class="qc-label">Marketing Content</div><div class="qc-desc">Create marketing copy</div></div>
+                        <div class="quick-card" data-action="product-desc"><div class="qc-icon">🏷️</div><div class="qc-label">Product Description</div><div class="qc-desc">Write product copy</div></div>
+                    </div>
+                </section>
+
+                <!-- ===== PROFILE ===== -->
+                <section class="page" id="page-profile">
+                    <div class="page-header"><div><h1>Profile</h1><p>Manage your account and preferences</p></div></div>
+                    <div class="profile-grid">
+                        <div class="profile-card"><div class="prof-avatar" id="profileAvatar">I</div><div class="prof-name" id="profileName">Iceback Master</div><div class="prof-email" id="profileEmail">iceback@safari.ai</div><div class="prof-plan"><i class="fas fa-crown"></i> Premium</div><div class="prof-stats"><div><div class="num" id="profChats">0</div><div class="lbl">Chats</div></div><div><div class="num" id="profImages">0</div><div class="lbl">Images</div></div><div><div class="num" id="profProjects">12</div><div class="lbl">Projects</div></div><div><div class="num" id="profDownloads">8</div><div class="lbl">Downloads</div></div></div></div>
+                        <div class="settings-group"><h4 style="margin-bottom:16px;">Account Settings</h4><div class="setting-row"><div class="left"><span class="title">Subscription Plan</span><span class="desc">Premium • Unlimited access</span></div><button class="btn-secondary" style="font-size:12px;padding:4px 16px;">Change</button></div><div class="setting-row"><div class="left"><span class="title">Credits Remaining</span><span class="desc">1,250 credits available</span></div><span style="font-weight:700;color:var(--accent);">1,250</span></div><div class="setting-row"><div class="left"><span class="title">API Keys</span><span class="desc">Manage your API integrations</span></div><button class="btn-secondary" style="font-size:12px;padding:4px 16px;">Manage</button></div><div class="setting-row"><div class="left"><span class="title">Security</span><span class="desc">Two-factor authentication</span></div><div class="toggle active" id="twoFactorToggle"></div></div><div class="setting-row"><div class="left"><span class="title">Voice Settings</span><span class="desc">Speech recognition preferences</span></div><button class="btn-secondary" style="font-size:12px;padding:4px 16px;">Configure</button></div></div>
+                    </div>
+                </section>
+
+                <!-- ===== SETTINGS ===== -->
+                <section class="page" id="page-settings">
+                    <div class="page-header"><div><h1>Settings</h1><p>Customize your experience</p></div></div>
+                    <div class="settings-group"><div class="setting-row"><div class="left"><span class="title">🌙 Dark Mode</span><span class="desc">Toggle dark/light theme</span></div><div class="toggle active" id="themeToggleSettings"></div></div><div class="setting-row"><div class="left"><span class="title">🌐 Language</span><span class="desc">Select your preferred language</span></div><select style="padding:6px 14px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);"><option>English</option><option>Spanish</option><option>French</option><option>Portuguese</option></select></div><div class="setting-row"><div class="left"><span class="title">🔔 Notifications</span><span class="desc">Enable or disable notifications</span></div><div class="toggle active" id="notifToggle"></div></div><div class="setting-row"><div class="left"><span class="title">🔒 Privacy</span><span class="desc">Data sharing and privacy settings</span></div><button class="btn-secondary" style="font-size:12px;padding:4px 16px;">Configure</button></div><div class="setting-row"><div class="left"><span class="title">🧠 AI Response Style</span><span class="desc">Set AI personality and tone</span></div><select style="padding:6px 14px;border-radius:30px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);"><option>Balanced</option><option>Concise</option><option>Detailed</option><option>Creative</option></select></div><div class="setting-row"><div class="left"><span class="title">💾 Memory Options</span><span class="desc">Save conversation history</span></div><div class="toggle active" id="memoryToggle"></div></div><div class="setting-row"><div class="left"><span class="title">🔗 Connected Accounts</span><span class="desc">Google, GitHub, Apple</span></div><button class="btn-secondary" style="font-size:12px;padding:4px 16px;">Manage</button></div></div>
+                </section>
+
+                <!-- ===== SAVED PROJECTS ===== -->
+                <section class="page" id="page-projects">
+                    <div class="page-header"><div><h1>Saved Projects</h1><p>Your saved AI projects</p></div></div>
+                    <div class="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">
+                        <div class="quick-card"><div class="qc-icon">📁</div><div class="qc-label">AI Chat History</div><div class="qc-desc">12 conversations</div></div>
+                        <div class="quick-card"><div class="qc-icon">🖼️</div><div class="qc-label">Generated Images</div><div class="qc-desc">45 images</div></div>
+                        <div class="quick-card"><div class="qc-icon">💻</div><div class="qc-label">Code Snippets</div><div class="qc-desc">8 snippets</div></div>
+                        <div class="quick-card"><div class="qc-icon">✍️</div><div class="qc-label">Writing Projects</div><div class="qc-desc">15 documents</div></div>
+                    </div>
+                </section>
+
+                <!-- ===== HISTORY ===== -->
+                <section class="page" id="page-history">
+                    <div class="page-header"><div><h1>History</h1><p>Your complete activity log</p></div></div>
+                    <div style="background:var(--bg-card);border-radius:var(--radius);padding:20px;border:1px solid var(--border);">
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>💬 Chat with AI</span><span style="color:var(--text-muted);font-size:13px;">Today, 2:30 PM</span></div>
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>🎨 Generated image of a cat</span><span style="color:var(--text-muted);font-size:13px;">Today, 1:15 PM</span></div>
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>💻 Generated Python code</span><span style="color:var(--text-muted);font-size:13px;">Yesterday, 11:20 AM</span></div>
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;"><span>📄 Summarized PDF document</span><span style="color:var(--text-muted);font-size:13px;">Yesterday, 9:45 AM</span></div>
+                        <div style="padding:10px 0;display:flex;justify-content:space-between;"><span>✍️ Generated essay on AI</span><span style="color:var(--text-muted);font-size:13px;">Jul 9, 4:10 PM</span></div>
+                    </div>
+                </section>
+
+                <!-- ===== DOWNLOADS ===== -->
+                <section class="page" id="page-downloads">
+                    <div class="page-header"><div><h1>Downloads</h1><p>Your downloaded files</p></div></div>
+                    <div style="background:var(--bg-card);border-radius:var(--radius);padding:20px;border:1px solid var(--border);">
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><span>📄 Safari_AI_Chat_Export.txt</span><span style="color:var(--text-muted);font-size:13px;">2.4 KB</span></div>
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><span>🖼️ generated_image_cat.png</span><span style="color:var(--text-muted);font-size:13px;">512 KB</span></div>
+                        <div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><span>💻 code_snippet.js</span><span style="color:var(--text-muted);font-size:13px;">1.8 KB</span></div>
+                        <div style="padding:10px 0;display:flex;justify-content:space-between;align-items:center;"><span>📄 invoice_001.pdf</span><span style="color:var(--text-muted);font-size:13px;">45 KB</span></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ===== FOOTER ===== -->
+            <footer class="app-footer">
+                <strong>SAFARI AI</strong> — Powered by Safari Technology
+                <div class="footer-links"><span>Version 1.0</span><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+                <div style="margin-top:4px;font-size:13px;color:var(--text-muted);">Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by Safari Technology &bull; 📞 +263788377887 / +263788848481</div>
+                <div style="margin-top:4px;font-size:12px;color:var(--text-muted);"><i class="fab fa-whatsapp" style="color:#25D366;"></i> <a href="https://whatsapp.com/channel/0029VbC0Vi50wajpq5TlRi0B" target="_blank" style="color:var(--accent);">Join our WhatsApp Channel</a></div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ===== NOTIFICATIONS ===== -->
+    <div class="notif-panel" id="notifPanel">
+        <div class="notif-header"><h3><i class="fas fa-bell"></i> Notifications</h3><button id="closeNotifBtn"><i class="fas fa-times"></i></button></div>
+        <div class="notif-item"><div class="ni-icon blue"><i class="fas fa-check-circle"></i></div><div class="ni-content"><p>Welcome to SAFARI AI!</p><small>Your premium platform is ready.</small></div></div>
+        <div class="notif-item"><div class="ni-icon purple"><i class="fas fa-wand-magic-sparkles"></i></div><div class="ni-content"><p>AI Image Generation</p><small>Try generating your first image now!</small></div></div>
+        <div class="notif-item"><div class="ni-icon green"><i class="fas fa-code"></i></div><div class="ni-content"><p>Code Studio Available</p><small>Generate code in 9 languages.</small></div></div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+                                                                                                                                                                                                                                                                                  </html>
