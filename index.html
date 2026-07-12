@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAFARI AI by ICEBACK MASTER TECH</title>
+    <!-- PDF.js for reading PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header-left">
+            <span class="hamburger" id="hamburgerBtn">☰</span>
+            <span class="header-title">SAFARI <span>AI</span></span>
+        </div>
+        <div class="header-right">
+            <select id="personaSelect" class="persona-select">
+                <option value="default">🧠 Default</option>
+                <option value="comedian">😂 Comedian</option>
+                <option value="teacher">📚 Teacher</option>
+                <option value="chef">🍳 Chef</option>
+                <option value="programmer">💻 Programmer</option>
+            </select>
+            <button id="themeToggle" class="icon-btn">🌙</button>
+            <span class="user-badge" id="userBadge">Guest</span>
+        </div>
+    </header>
+
+    <!-- ========== SIDE MENU ========== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <nav class="menu-panel" id="menuPanel">
+        <div class="menu-close" id="menuClose">✕</div>
+        <div style="padding: 0 16px 12px; font-weight: 700; color: var(--accent); font-size: 18px;">SAFARI AI</div>
+        
+        <a class="menu-item" id="menuContact"><span class="icon">📞</span> Contact Us</a>
+        <a class="menu-item" id="menuFollow"><span class="icon">📢</span> Join Channel</a>
+        <div class="menu-divider"></div>
+        
+        <div style="padding: 4px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary);">📁 CHAT FOLDERS</div>
+        <div id="folderList" style="margin: 4px 0;"></div>
+        <a class="menu-item" id="menuNewFolder"><span class="icon">➕</span> New Folder</a>
+        <div class="menu-divider"></div>
+
+        <a class="menu-item" id="menuNewChat"><span class="icon">💬</span> New Chat</a>
+        <a class="menu-item" id="menuLessons"><span class="icon">📚</span> Pro Lessons</a>
+        <a class="menu-item" id="menuFootball"><span class="icon">⚽</span> Football</a>
+        <a class="menu-item" id="menuExportChat"><span class="icon">📥</span> Export Chat</a>
+        <a class="menu-item" id="menuClearChat"><span class="icon">🗑️</span> Clear History</a>
+        <div class="menu-divider"></div>
+        <a class="menu-item" id="menuLogout"><span class="icon">🚪</span> Logout</a>
+        
+        <div class="menu-footer-text">
+            <strong>POWERED BY ICEBACK MASTER TECH</strong><br />
+            <span style="font-size: 11px;">Safari Technology © 2026</span>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <div class="main-wrap">
+
+        <!-- LOGIN -->
+        <div id="loginScreen" class="login-screen">
+            <div class="logo-big">🦁 SAFARI <span>AI</span></div>
+            <div class="sub">by <strong>ICEBACK MASTER TECH</strong> • Safari Technology</div>
+            <div class="login-box">
+                <label for="loginEmail">👤 Your Username</label>
+                <input type="text" id="loginEmail" placeholder="Enter your name" value="Iceback" />
+                <button class="btn-primary" id="loginBtn">🚀 Enter Chat</button>
+                <div class="login-error" id="loginError"></div>
+                <div class="login-code-hint" id="codeHint">🔐 Your chats are saved locally to this device.</div>
+            </div>
+            <div style="margin-top: 20px; font-size: 13px; color: var(--text-secondary);">
+                <span>📞 +263 788 377 887</span> • <span>+263 788 848 481</span>
+            </div>
+        </div>
+
+        <!-- CHAT INTERFACE -->
+        <div id="chatInterface" class="chat-area hidden">
+            <div class="quick-replies" id="quickReplies">
+                <button data-msg="safari generate cat">🐱 Generate Cat</button>
+                <button data-msg="safari search AI">🔍 Search Web</button>
+                <button data-msg="Tell me a joke">😂 Joke</button>
+                <button data-msg="What is AI?">🧠 What is AI?</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <!-- Lessons -->
+            <div id="lessonPanel" class="lesson-panel hidden">
+                <div style="font-weight:600;color:var(--accent);">📚 Professional Lessons</div>
+                <div class="lesson-row">
+                    <select id="lessonClass">
+                        <option value="math">Math</option>
+                        <option value="science">Science</option>
+                        <option value="english">English</option>
+                        <option value="coding">Coding</option>
+                    </select>
+                    <button id="lessonStartBtn">▶ Start</button>
+                    <button id="lessonNextBtn">⏭ Next</button>
+                    <span id="lessonScore">Score: 0</span>
+                </div>
+                <div id="lessonQuestion" style="margin-top:10px; font-weight:500;"></div>
+                <div class="lesson-row" id="lessonAnswerArea">
+                    <input type="text" id="lessonAnswer" placeholder="Type your answer..." />
+                    <button id="lessonSubmitBtn">✅ Submit</button>
+                </div>
+                <div id="lessonFeedback" style="margin-top:6px; font-size:14px;"></div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-wrap">
+                <input type="text" id="chatInput" placeholder="Ask Safari AI anything..." />
+                <div class="input-actions">
+                    <button id="voiceBtn" class="icon-btn" title="Voice input">🎤</button>
+                    <label for="fileUpload" title="Attach file (PDF/TXT/Image)">📎</label>
+                    <input type="file" id="fileUpload" accept=".txt,.pdf,image/*" />
+                    <button id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>POWERED BY ICEBACK MASTER TECH</strong> • Safari Technology • 
+            <span style="font-size:12px;">📞 +263788377887 / +263788848481</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
