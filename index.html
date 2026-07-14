@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>SAFARI AI – Next‑Gen Status & Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== PARTICLES ===== -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===== LOGIN OVERLAY ===== -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-logo">🦁</div>
+            <h2>SAFARI <span>AI</span></h2>
+            <p>Welcome back! Sign in to continue</p>
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" value="demo@safari.ai" /></div>
+            <div class="form-group"><label>Password</label><input type="password" id="loginPassword" value="password123" /></div>
+            <button class="btn-primary" id="loginBtn">Enter Safari</button>
+            <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);">📞 +263788377887</div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
+    <div id="app" class="app hidden">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="brand">🦁 SAFARI <span>AI</span></span>
+                <span class="status-label">● Status</span>
+            </div>
+            <div class="header-right">
+                <button class="premium-btn" id="premiumBtn"><i class="fas fa-crown"></i> Premium</button>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <span class="user-badge" id="userBadge">Guest</span>
+            </div>
+        </header>
+
+        <!-- ===== STATUS FEED ===== -->
+        <section class="status-feed" id="statusFeed">
+            <div class="status-grid" id="statusGrid"></div>
+        </section>
+
+        <!-- ===== TABS ===== -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="search"><i class="fas fa-search"></i> Search</button>
+            <button class="tab-btn" data-tab="talk"><i class="fas fa-comment"></i> Talk</button>
+            <button class="tab-btn" data-tab="research"><i class="fas fa-briefcase"></i> Research</button>
+            <button class="tab-btn" data-tab="more"><i class="fas fa-ellipsis-h"></i> More</button>
+        </nav>
+
+        <!-- ===== TAB CONTENT ===== -->
+        <div class="tab-content">
+            <!-- SEARCH -->
+            <div class="tab-pane active" id="tab-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search Safari..." />
+                    <button id="searchBtn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div id="searchResult" class="search-result">Search for anything – web, images, news.</div>
+            </div>
+
+            <!-- TALK (AI Chat) -->
+            <div class="tab-pane" id="tab-talk">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message assistant">
+                            <div class="msg-label">🤖 Safari AI</div>
+                            <div class="msg-content">👋 Hello! I'm Safari AI. How can I assist you?</div>
+                            <div class="msg-time">Just now</div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <button class="voice-input-btn" id="voiceInputBtn" title="Speech to Text"><i class="fas fa-microphone"></i></button>
+                        <input type="text" id="chatInput" placeholder="Type a message..." />
+                        <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                        <button class="tts-btn" id="ttsBtn" title="Text to Speech"><i class="fas fa-volume-up"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESEARCH -->
+            <div class="tab-pane" id="tab-research">
+                <div class="research-grid">
+                    <div class="research-card" onclick="researchTopic('AI')">
+                        <i class="fas fa-brain"></i>
+                        <h4>Artificial Intelligence</h4>
+                        <p>What is AI? Learn the basics</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('Business')">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Business Strategy</h4>
+                        <p>Market analysis, planning, growth</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('Technology')">
+                        <i class="fas fa-microchip"></i>
+                        <h4>Technology</h4>
+                        <p>Innovations, gadgets, future</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('Education')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Education</h4>
+                        <p>Learning, courses, knowledge</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('Health')">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Health & Wellness</h4>
+                        <p>Nutrition, fitness, medicine</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('Science')">
+                        <i class="fas fa-flask"></i>
+                        <h4>Science</h4>
+                        <p>Physics, chemistry, biology</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('History')">
+                        <i class="fas fa-landmark"></i>
+                        <h4>History</h4>
+                        <p>Past events, civilizations, people</p>
+                    </div>
+                    <div class="research-card school-card" onclick="openSchoolMode()">
+                        <i class="fas fa-school"></i>
+                        <h4>🏫 SCHOOL STUFFS</h4>
+                        <p>Ask questions & draw diagrams</p>
+                    </div>
+                </div>
+                <div id="researchResult" class="research-result">Tap a card to start research.</div>
+            </div>
+
+            <!-- MORE -->
+            <div class="tab-pane" id="tab-more">
+                <div class="more-grid">
+                    <div class="more-item" onclick="switchTab('talk')"><i class="fas fa-comment"></i> AI Chat</div>
+                    <div class="more-item" onclick="window.location.hash='image'"><i class="fas fa-image"></i> Image Studio</div>
+                    <div class="more-item" onclick="window.location.hash='code'"><i class="fas fa-code"></i> Code Studio</div>
+                    <div class="more-item" onclick="window.location.hash='writing'"><i class="fas fa-pen"></i> Writing</div>
+                    <div class="more-item" onclick="window.location.hash='doc'"><i class="fas fa-file-pdf"></i> Documents</div>
+                    <div class="more-item" onclick="window.location.hash='business'"><i class="fas fa-briefcase"></i> Business</div>
+                    <div class="more-item" onclick="window.location.hash='settings'"><i class="fas fa-cog"></i> Settings</div>
+                    <div class="more-item" onclick="window.location.href='https://wa.me/263788377887'"><i class="fab fa-whatsapp"></i> Contact</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SCHOOL MODE (Hidden by default) ===== -->
+        <div class="school-mode" id="schoolMode">
+            <div class="school-header">
+                <button class="back-btn" onclick="closeSchoolMode()"><i class="fas fa-arrow-left"></i> Back</button>
+                <h2><i class="fas fa-school"></i> School Stuffs</h2>
+            </div>
+            <div class="school-content">
+                <div class="school-search">
+                    <input type="text" id="schoolInput" placeholder="Ask anything about school subjects..." />
+                    <button id="schoolAskBtn"><i class="fas fa-search"></i> Ask</button>
+                    <button id="schoolVoiceBtn" title="Voice input"><i class="fas fa-microphone"></i></button>
+                </div>
+                <div id="schoolResult" class="school-result">
+                    <div class="school-placeholder">
+                        <i class="fas fa-graduation-cap"></i>
+                        <p>Ask about agriculture, biology, math, history, or any school subject!</p>
+                        <p style="font-size:13px;color:var(--text-muted);">Try: "What is agriculture?" or "Draw respiratory system"</p>
+                    </div>
+                </div>
+
+                <!-- Drawing Tool -->
+                <div class="drawing-tool" id="drawingTool">
+                    <div class="drawing-header">
+                        <span><i class="fas fa-paint-brush"></i> Drawing Tool</span>
+                        <div class="drawing-controls">
+                            <button class="draw-btn" onclick="setDrawTool('pen')"><i class="fas fa-pen"></i> Pen</button>
+                            <button class="draw-btn" onclick="setDrawTool('line')"><i class="fas fa-minus"></i> Line</button>
+                            <button class="draw-btn" onclick="setDrawTool('rect')"><i class="fas fa-square"></i> Rect</button>
+                            <button class="draw-btn" onclick="setDrawTool('circle')"><i class="fas fa-circle"></i> Circle</button>
+                            <button class="draw-btn" onclick="setDrawTool('text')"><i class="fas fa-font"></i> Text</button>
+                            <button class="draw-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Clear</button>
+                        </div>
+                        <div class="drawing-colors">
+                            <input type="color" id="drawColor" value="#4f46e5" />
+                            <input type="range" id="drawSize" min="1" max="20" value="3" />
+                            <span style="font-size:12px;">Size: <span id="sizeLabel">3</span></span>
+                            <button class="draw-btn" onclick="saveDrawing()"><i class="fas fa-save"></i> Save</button>
+                            <button class="draw-btn" onclick="closeDrawing()"><i class="fas fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                    <div class="drawing-canvas-wrapper">
+                        <canvas id="drawCanvas" width="700" height="500"></canvas>
+                    </div>
+                    <div style="padding:8px;font-size:12px;color:var(--text-muted);text-align:center;">
+                        💡 Click on canvas to place text labels after selecting "Text" tool
+                    </div>
+                </div>
+                <button class="open-drawing-btn" id="openDrawingBtn"><i class="fas fa-paint-brush"></i> Open Drawing Tool</button>
+            </div>
+        </div>
+
+        <!-- ===== PREMIUM MODAL ===== -->
+        <div class="premium-modal" id="premiumModal">
+            <div class="premium-content">
+                <span class="close-modal" id="closePremium">&times;</span>
+                <h3><i class="fas fa-crown"></i> Premium Access</h3>
+                <p>Enter the code to unlock premium features:</p>
+                <input type="password" id="premiumCode" placeholder="Enter code..." maxlength="4" />
+                <button class="btn-primary" id="premiumUnlockBtn">Unlock</button>
+                <div id="premiumError" class="premium-error"></div>
+            </div>
+        </div>
+
+        <!-- ===== ADD STATUS MODAL ===== -->
+        <div class="status-modal" id="statusModal">
+            <div class="status-modal-content">
+                <span class="close-modal" id="closeStatusModal">&times;</span>
+                <h3><i class="fas fa-plus-circle"></i> Add Status</h3>
+                <p>Choose a photo or video to share:</p>
+                <input type="file" id="statusFileInput" accept="image/*,video/*" />
+                <div id="statusPreview" class="status-preview"></div>
+                <button class="btn-primary" id="submitStatusBtn">Share Status</button>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p><strong>SAFARI AI</strong> — Powered by <strong>ICEBACK MASTER TECH</strong> &amp; Safari Technology</p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://whatsapp.com/channel/0029VbC0Vi50wajpq5TlRi0B" target="_blank">Join Channel</a> &bull; 📧 safaritechcompany@gmail.com</p>
+                <p style="font-size:12px;color:var(--text-muted);">© 2026 Safari AI. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+                      </html>
