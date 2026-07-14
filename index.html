@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>SAFARI AI – Next‑Gen Status & Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== PARTICLES ===== -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===== LOGIN OVERLAY ===== -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-logo">🦁</div>
+            <h2>SAFARI <span>AI</span></h2>
+            <p>Welcome back! Sign in to continue</p>
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" value="demo@safari.ai" /></div>
+            <div class="form-group"><label>Password</label><input type="password" id="loginPassword" value="password123" /></div>
+            <button class="btn-primary" id="loginBtn">Enter Safari</button>
+            <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);">📞 +263788377887</div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
+    <div id="app" class="app hidden">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="brand">🦁 SAFARI <span>AI</span></span>
+                <span class="status-label">● Status</span>
+            </div>
+            <div class="header-right">
+                <button class="premium-btn" id="premiumBtn"><i class="fas fa-crown"></i> Premium</button>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <span class="user-badge" id="userBadge">Guest</span>
+            </div>
+        </header>
+
+        <!-- ===== STATUS FEED ===== -->
+        <section class="status-feed" id="statusFeed">
+            <div class="status-grid" id="statusGrid"></div>
+        </section>
+
+        <!-- ===== TABS ===== -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="search"><i class="fas fa-search"></i> Search</button>
+            <button class="tab-btn" data-tab="talk"><i class="fas fa-comment"></i> Talk</button>
+            <button class="tab-btn" data-tab="research"><i class="fas fa-graduation-cap"></i> School</button>
+            <button class="tab-btn" data-tab="more"><i class="fas fa-th-large"></i> More</button>
+        </nav>
+
+        <!-- ===== TAB CONTENT ===== -->
+        <div class="tab-content">
+            <!-- SEARCH -->
+            <div class="tab-pane active" id="tab-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search Safari..." />
+                    <button id="searchBtn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div id="searchResult" class="search-result">Search for anything – web, images, news.</div>
+            </div>
+
+            <!-- TALK (AI Chat) -->
+            <div class="tab-pane" id="tab-talk">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message assistant">
+                            <div class="msg-label">🤖 Safari AI</div>
+                            <div class="msg-content">👋 Hello! I'm Safari AI. Ask me about school, generate images, or code!</div>
+                            <div class="msg-time">Just now</div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ask a question..." />
+                        <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHOOL (Research) -->
+            <div class="tab-pane" id="tab-research">
+                <div class="research-grid">
+                    <div class="research-card" onclick="researchTopic('math')">
+                        <i class="fas fa-calculator"></i>
+                        <h4>Mathematics</h4>
+                        <p>Algebra, Geometry, Calculus & more</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('science')">
+                        <i class="fas fa-flask"></i>
+                        <h4>Science</h4>
+                        <p>Biology, Chemistry, Physics & more</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('history')">
+                        <i class="fas fa-landmark"></i>
+                        <h4>History</h4>
+                        <p>World Wars, Civilizations, Revolutions</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('english')">
+                        <i class="fas fa-book"></i>
+                        <h4>English</h4>
+                        <p>Grammar, Writing, Literature</p>
+                    </div>
+                    <div class="research-card" onclick="researchTopic('geography')">
+                        <i class="fas fa-globe-africa"></i>
+                        <h4>Geography</h4>
+                        <p>Continents, Oceans, Climate & more</p>
+                    </div>
+                </div>
+                <div id="researchResult" class="research-result">Tap a subject to learn more.</div>
+            </div>
+
+            <!-- MORE (Tools) -->
+            <div class="tab-pane" id="tab-more">
+                <!-- Tool Menu -->
+                <div id="toolsMenu" class="more-grid">
+                    <div class="more-item" onclick="showTool('image')"><i class="fas fa-image"></i> Image Studio</div>
+                    <div class="more-item" onclick="showTool('code')"><i class="fas fa-code"></i> Code Studio</div>
+                    <div class="more-item" onclick="window.location.hash='writing'"><i class="fas fa-pen"></i> Writing</div>
+                    <div class="more-item" onclick="window.location.hash='doc'"><i class="fas fa-file-pdf"></i> Documents</div>
+                    <div class="more-item" onclick="window.location.hash='business'"><i class="fas fa-briefcase"></i> Business</div>
+                    <div class="more-item" onclick="window.location.hash='settings'"><i class="fas fa-cog"></i> Settings</div>
+                    <div class="more-item" onclick="window.location.href='https://wa.me/263788377887'"><i class="fab fa-whatsapp"></i> Contact</div>
+                </div>
+
+                <!-- Image Studio Tool -->
+                <div id="toolImage" class="tool-panel hidden">
+                    <button class="btn-secondary" onclick="showTool('menu')" style="margin-bottom:12px;"><i class="fas fa-arrow-left"></i> Back</button>
+                    <h3><i class="fas fa-image"></i> Image Studio</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;">Generate unlimited images from text prompts</p>
+                    <div class="image-tool">
+                        <div class="input-group">
+                            <input type="text" id="imagePrompt" placeholder="Describe your image..." style="flex:2;" />
+                            <select id="imageStyle" style="flex:1;">
+                                <option value="realistic">Realistic</option>
+                                <option value="anime">Anime</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="pencil">Pencil Sketch</option>
+                                <option value="watercolor">Watercolor</option>
+                                <option value="ghibli">Ghibli</option>
+                            </select>
+                            <button class="btn-primary" id="generateImageBtn"><i class="fas fa-wand-magic-sparkles"></i> Generate</button>
+                        </div>
+                        <div id="imageResult" class="image-result">Your generated image will appear here.</div>
+                        <div id="imageActions" class="image-actions hidden">
+                            <button class="btn-secondary" id="downloadImageBtn"><i class="fas fa-download"></i> Download</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Studio Tool -->
+                <div id="toolCode" class="tool-panel hidden">
+                    <button class="btn-secondary" onclick="showTool('menu')" style="margin-bottom:12px;"><i class="fas fa-arrow-left"></i> Back</button>
+                    <h3><i class="fas fa-code"></i> Code Studio</h3>
+                    <p style="color:var(--text-secondary);font-size:14px;">Generate, debug, explain, and convert code</p>
+                    <div class="code-tool">
+                        <div class="input-group">
+                            <select id="codeLanguage" style="flex:1;">
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="html">HTML/CSS</option>
+                                <option value="java">Java</option>
+                                <option value="csharp">C#</option>
+                                <option value="cpp">C++</option>
+                                <option value="php">PHP</option>
+                                <option value="sql">SQL</option>
+                                <option value="typescript">TypeScript</option>
+                            </select>
+                            <select id="codeAction" style="flex:1;">
+                                <option value="generate">Generate Code</option>
+                                <option value="debug">Debug Code</option>
+                                <option value="explain">Explain Code</option>
+                                <option value="convert">Convert Language</option>
+                            </select>
+                            <button class="btn-primary" id="codeGenerateBtn"><i class="fas fa-code"></i> Generate</button>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                            <div>
+                                <label style="font-weight:600;font-size:13px;">📝 Input / Description</label>
+                                <textarea id="codeInput" rows="6" placeholder="Describe what you want..." style="width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);color:var(--text);resize:vertical;"></textarea>
+                            </div>
+                            <div>
+                                <label style="font-weight:600;font-size:13px;">💻 Output</label>
+                                <div id="codeOutput" style="width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);color:var(--text);min-height:150px;font-family:monospace;font-size:13px;overflow:auto;white-space:pre-wrap;">// Your code will appear here</div>
+                                <button class="btn-secondary" id="copyCodeBtn" style="margin-top:6px;"><i class="fas fa-copy"></i> Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PREMIUM MODAL ===== -->
+        <div class="premium-modal" id="premiumModal">
+            <div class="premium-content">
+                <span class="close-modal" id="closePremium">&times;</span>
+                <h3><i class="fas fa-crown"></i> Premium Access</h3>
+                <p>Enter the code to unlock premium features:</p>
+                <input type="password" id="premiumCode" placeholder="Enter code..." maxlength="4" />
+                <button class="btn-primary" id="premiumUnlockBtn">Unlock</button>
+                <div id="premiumError" class="premium-error"></div>
+            </div>
+        </div>
+
+        <!-- ===== ADD STATUS MODAL ===== -->
+        <div class="status-modal" id="statusModal">
+            <div class="status-modal-content">
+                <span class="close-modal" id="closeStatusModal">&times;</span>
+                <h3><i class="fas fa-plus-circle"></i> Add Status</h3>
+                <p>Choose a photo or video to share:</p>
+                <input type="file" id="statusFileInput" accept="image/*,video/*" />
+                <div id="statusPreview" class="status-preview"></div>
+                <button class="btn-primary" id="submitStatusBtn">Share Status</button>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p><strong>SAFARI AI</strong> — Powered by <strong>ICEBACK MASTER TECH</strong> &amp; Safari Technology</p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://whatsapp.com/channel/0029VbC0Vi50wajpq5TlRi0B" target="_blank">Join Channel</a> &bull; 📧 safaritechcompany@gmail.com</p>
+                <p style="font-size:12px;color:var(--text-muted);">© 2026 Safari AI. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+                      </html>
