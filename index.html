@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>SAFARI AI V1 – by ICEBACK MASTER TECH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== PARTICLES ===== -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- ===== MAIN APP (Always Visible) ===== -->
+    <div id="app" class="app">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="brand">🦁 SAFARI <span>AI</span> V1</span>
+                <span class="status-dot"></span>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" id="searchIcon" title="Search"><i class="fas fa-search"></i></button>
+                <button class="icon-btn" id="notifIcon" title="Notifications"><i class="fas fa-bell"></i><span class="badge" id="notifBadge">3</span></button>
+                <button class="premium-btn" id="premiumBtn"><i class="fas fa-crown"></i> Premium</button>
+                <button class="icon-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <span class="user-badge" id="userBadge">Owner</span>
+            </div>
+        </header>
+
+        <!-- ===== STATUS STORIES ===== -->
+        <div class="stories-container" id="storiesContainer">
+            <div class="stories-scroll" id="storiesScroll">
+                <div class="story-ring" id="ownerStoryRing">
+                    <div class="ring"><div class="text-status">👑<br>Owner</div></div>
+                    <span class="story-name">Owner</span>
+                    <span class="story-time">Live</span>
+                </div>
+                <div class="add-story-ring" id="addStoryBtn">+<span>Add</span></div>
+            </div>
+        </div>
+
+        <!-- ===== CHAT ===== -->
+        <div class="main-content" id="mainContent">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="msg-avatar">🦁</div>
+                        <div class="msg-bubble">
+                            <div class="msg-label">SAFARI AI V1</div>
+                            <div class="msg-content">👋 Hello! I'm Safari AI V1, built by <strong>ICEBACK MASTER TECH</strong>. I can answer school questions, generate images, search the web, and more. Ask me anything!</div>
+                            <div class="msg-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <div class="chat-input-row">
+                        <div class="file-tools">
+                            <label for="chatFileInput"><i class="fas fa-paperclip"></i></label>
+                            <input type="file" id="chatFileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt,.mp3,.wav,.gif" multiple />
+                            <label for="cameraInput"><i class="fas fa-camera"></i></label>
+                            <input type="file" id="cameraInput" accept="image/*,video/*" capture="environment" />
+                        </div>
+                        <input type="text" id="chatInput" placeholder="Type your question..." />
+                        <button class="voice-btn" id="voiceBtn"><i class="fas fa-microphone"></i></button>
+                        <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div id="filePreview" class="file-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SIDE MENU ===== -->
+        <div class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <div class="brand">🦁 SAFARI <span>AI</span></div>
+                <span class="close-menu" id="closeMenu">&times;</span>
+            </div>
+            <div class="menu-items">
+                <a onclick="closeMenu();"><i class="fas fa-home"></i> Home</a>
+                <a onclick="closeMenu();"><i class="fas fa-plus-circle"></i> New Chat</a>
+                <div class="divider"></div>
+                <a onclick="closeMenu();"><i class="fas fa-comment"></i> AI Chat</a>
+                <a onclick="closeMenu();"><i class="fas fa-image"></i> AI Image Generator</a>
+                <a onclick="closeMenu();"><i class="fas fa-video"></i> AI Video Generator</a>
+                <a onclick="closeMenu();"><i class="fas fa-microphone"></i> AI Voice Assistant</a>
+                <a onclick="closeMenu();"><i class="fas fa-music"></i> AI Music Generator</a>
+                <div class="divider"></div>
+                <a onclick="closeMenu();"><i class="fas fa-search"></i> Research</a>
+                <a onclick="closeMenu();"><i class="fas fa-globe"></i> Search</a>
+                <a onclick="closeMenu();"><i class="fas fa-briefcase"></i> Business</a>
+                <a onclick="closeMenu();"><i class="fas fa-shield-alt"></i> VPN Tools</a>
+                <a onclick="closeMenu();"><i class="fas fa-language"></i> Translate</a>
+                <div class="divider"></div>
+                <a onclick="closeMenu();"><i class="fas fa-history"></i> Saved Chats</a>
+                <a onclick="closeMenu();"><i class="fas fa-bell"></i> Notifications</a>
+                <a onclick="closeMenu();"><i class="fas fa-clock"></i> History</a>
+                <div class="divider"></div>
+                <a onclick="closeMenu();"><i class="fas fa-crown"></i> Premium</a>
+                <a onclick="closeMenu();"><i class="fas fa-cog"></i> Settings</a>
+                <a onclick="closeMenu();"><i class="fas fa-question-circle"></i> Help</a>
+                <a onclick="closeMenu();"><i class="fas fa-info-circle"></i> About</a>
+                <div class="divider"></div>
+                <a id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu();"></div>
+
+        <!-- ===== PREMIUM MODAL ===== -->
+        <div class="premium-modal" id="premiumModal">
+            <div class="premium-content">
+                <span class="close-modal" id="closePremium">&times;</span>
+                <h3><i class="fas fa-crown"></i> Premium Access</h3>
+                <p>Enter PIN to unlock</p>
+                <input type="password" id="premiumCode" class="pin-input" maxlength="4" placeholder="0000" />
+                <button class="btn-primary" id="premiumUnlockBtn">Unlock</button>
+                <div id="premiumError" class="premium-error"></div>
+                <div id="premiumFeatures" class="premium-features hidden">
+                    <span><i class="fas fa-check-circle"></i> Unlimited AI Chats</span>
+                    <span><i class="fas fa-check-circle"></i> Unlimited Image Generation</span>
+                    <span><i class="fas fa-check-circle"></i> Unlimited Video Generation</span>
+                    <span><i class="fas fa-check-circle"></i> Unlimited File Uploads</span>
+                    <span><i class="fas fa-check-circle"></i> Faster AI Responses</span>
+                    <span><i class="fas fa-check-circle"></i> VIP Badge</span>
+                    <span><i class="fas fa-check-circle"></i> Exclusive AI Models</span>
+                    <span><i class="fas fa-check-circle"></i> Early Feature Access</span>
+                    <span><i class="fas fa-check-circle"></i> Unlimited Storage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p><strong>SAFARI AI V1</strong> — Created by <strong>ICEBACK MASTER TECH</strong></p>
+                <p>Powered by Safari Technology &amp; ICEBACK MASTER TECH</p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://whatsapp.com/channel/0029VbC0Vi50wajpq5TlRi0B" target="_blank">Join Channel</a> &bull; 📧 safaritechcompany@gmail.com</p>
+                <p style="font-size:11px;color:var(--text-muted);">📞 +263788377887 &bull; 📧 icebackmaster@gmail.com</p>
+                <p style="font-size:10px;color:var(--text-muted);">© 2026 Safari AI. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
